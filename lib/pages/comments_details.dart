@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import "dart:convert";
 import 'package:flutter_demo/constant/constant.dart' as constant;
 
-import 'package:flutter_demo/reddit_card.dart';
-import 'package:flutter_demo/comment.dart';
-import 'package:flutter_demo/comments_container.dart';
+import 'package:flutter_demo/widgets/reddit_card.dart';
+import 'package:flutter_demo/widgets/comment.dart';
+import 'package:flutter_demo/widgets/comments_container.dart';
 
 class CommentsDetails extends StatefulWidget {
   const CommentsDetails(this.redditList, {super.key});
@@ -37,8 +37,8 @@ class _CommentsDetails extends State<CommentsDetails> {
         'Content-Type': 'application/json',
       });
       var comments = json.decode(response.body);
-      print('Response body: ${comments}');
-      print('Response comments: ${comments[1]['data']['children']}');
+      // print('Response body: ${comments}');
+      // print('Response comments: ${comments[1]['data']['children']}');
       setState(() {
         _commentList = comments[1]['data']['children'];
       });

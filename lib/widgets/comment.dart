@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/comments_container.dart';
+import 'package:flutter_demo/widgets/comments_container.dart';
 import 'package:flutter_demo/constant/constant.dart' as constant;
 
 class Comment extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/comment.dart';
+import 'package:flutter_demo/widgets/comment.dart';
 
 class CommentsContainer extends StatelessWidget {
   CommentsContainer(this.commentList, {super.key});

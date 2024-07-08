@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/reddit_card.dart';
-import 'package:flutter_demo/comments_details.dart';
+import 'package:flutter_demo/widgets/reddit_card.dart';
+import 'package:flutter_demo/pages/comments_details.dart';
 
-class RedditContainer extends StatelessWidget {
-  RedditContainer({super.key, required this.redditList});
+class RedditListing extends StatelessWidget {
+  RedditListing({super.key, required this.redditList});
 
   List<dynamic> redditList;
 
