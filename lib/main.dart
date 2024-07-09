@@ -35,20 +35,5 @@ class MyApp extends StatelessWidget {
         home: const RedditScreen(),
       ),
     );
-
-    // return Builder(builder: (context) {
-    //   return BlocProvider(
-    //     create: (context) => RedditListBloc(),
-    //     child: MaterialApp(
-    //       theme: ThemeData(
-    //         scaffoldBackgroundColor: Colors.white,
-    //         textTheme: GoogleFonts.rubikTextTheme(
-    //           Theme.of(context).textTheme,
-    //         ),
-    //       ),
-    //       home: const RedditScreen(),
-    //     ),
-    //   );
-    // });
   }
 }

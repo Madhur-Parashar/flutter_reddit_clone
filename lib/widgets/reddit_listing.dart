@@ -11,7 +11,7 @@ class RedditListing extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => CommentsDetails(redditList)),
+          builder: (context) => CommentsScreen(redditList)),
     );
   }
 

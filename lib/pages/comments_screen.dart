@@ -4,18 +4,18 @@ import 'package:flutter_demo/bloc/reddit_comments_bloc/reddit_comments_bloc.dart
 import 'package:flutter_demo/bloc/reddit_comments_bloc/reddit_comments_state.dart';
 
 import 'package:flutter_demo/widgets/reddit_card.dart';
-import 'package:flutter_demo/widgets/comments_container.dart';
+import 'package:flutter_demo/widgets/comments_list.dart';
 
-class CommentsDetails extends StatefulWidget {
-  const CommentsDetails(this.redditList, {super.key});
+class CommentsScreen extends StatefulWidget {
+  const CommentsScreen(this.redditList, {super.key});
 
   final Map<String, dynamic> redditList;
 
   @override
-  State<CommentsDetails> createState() => _CommentsDetails();
+  State<CommentsScreen> createState() => _CommentsScreen();
 }
 
-class _CommentsDetails extends State<CommentsDetails> {
+class _CommentsScreen extends State<CommentsScreen> {
   @override
   initState() {
     super.initState();
@@ -47,7 +47,7 @@ class _CommentsDetails extends State<CommentsDetails> {
               BlocBuilder<RedditCommentBloc, RedditCommentsState>(
                   builder: (context, state) {
                 if (state is RedditCommentsListState) {
-                  return CommentsContainer(
+                  return CommentsList(
                       state.redditCommentsList[1]['data']['children']);
                 }
                 return const Center(

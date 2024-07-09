@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/widgets/comments_container.dart';
+import 'package:flutter_demo/widgets/comments_list.dart';
 import 'package:flutter_demo/constant/constant.dart' as constant;
 
 class Comment extends StatelessWidget {
@@ -42,7 +42,7 @@ class Comment extends StatelessWidget {
                   fontSize: 16,
                 )),
             if(comment['replies'] != '')
-                CommentsContainer(comment['replies']['data']['children'])
+                CommentsList(comment['replies']['data']['children'])
               
           ],
         ));

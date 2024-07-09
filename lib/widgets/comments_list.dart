@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/widgets/comment.dart';
 
-class CommentsContainer extends StatelessWidget {
-  CommentsContainer(this.commentList, {super.key});
+class CommentsList extends StatelessWidget {
+  CommentsList(this.commentList, {super.key});
 
   List<dynamic> commentList = [];
 
