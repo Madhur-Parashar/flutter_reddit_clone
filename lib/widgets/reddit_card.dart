@@ -27,14 +27,14 @@ class RedditCard extends StatelessWidget {
                   child: Text(redditItem['author_fullname'],
                       style: const TextStyle(
                           color: Color.fromARGB(255, 18, 19, 19),
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold))),
               Container(
                   padding: const EdgeInsets.only(right: 4),
                   child: const Text("13h",
                       style: TextStyle(
                         color: Colors.black87,
-                        fontSize: 16,
+                        fontSize: 14,
                       ))),
               Container(
                   padding: const EdgeInsets.only(right: 4),
@@ -42,7 +42,7 @@ class RedditCard extends StatelessWidget {
               Text(redditItem['domain'],
                   style: const TextStyle(
                     color: Colors.black87,
-                    fontSize: 16,
+                    fontSize: 14,
                   )),
             ],
           ),
@@ -58,7 +58,7 @@ class RedditCard extends StatelessWidget {
                     style: const TextStyle(
                         color: Color.fromARGB(255, 18, 19, 19),
                         letterSpacing: .5,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold),
                   ),
                 )
@@ -71,7 +71,7 @@ class RedditCard extends StatelessWidget {
                       style: const TextStyle(
                           color: Color.fromARGB(255, 18, 19, 19),
                           letterSpacing: .5,
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold)),
                   trailing: Card(
                     shape: RoundedRectangleBorder(
@@ -99,7 +99,7 @@ class RedditCard extends StatelessWidget {
                     Text(redditItem['ups'].toString(),
                         style: const TextStyle(
                             color: Color.fromARGB(255, 18, 19, 19),
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold)),
                     const VerticalDivider(
                       width: 20,
@@ -112,7 +112,7 @@ class RedditCard extends StatelessWidget {
                     Text(redditItem['downs'].toString(),
                         style: const TextStyle(
                             color: Color.fromARGB(255, 18, 19, 19),
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -140,7 +140,7 @@ class RedditCard extends StatelessWidget {
                           redditItem['num_comments'].toString(),
                           style: const TextStyle(
                               color: Color.fromARGB(255, 18, 19, 19),
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold),
                         ),
                       )

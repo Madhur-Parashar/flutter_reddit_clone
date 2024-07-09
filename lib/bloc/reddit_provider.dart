@@ -16,4 +16,14 @@ class RedditProvider {
     Map<String, dynamic> listData = json.decode(response.body);
     return listData;
   }
+
+  Future<List> fetchCommentsList(id) async {
+    var url = Uri.https('oauth.reddit.com', '/r/apple/comments/$id');
+    final response = await http.get(url, headers: {
+      'Authorization': 'Bearer ${constant.AUTORIZATION_TOKEN}',
+      'Content-Type': 'application/json',
+    });
+    List listData = json.decode(response.body);
+    return listData;
+  }
 }

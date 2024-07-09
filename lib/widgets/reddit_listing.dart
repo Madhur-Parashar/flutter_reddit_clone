@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/widgets/reddit_card.dart';
-import 'package:flutter_demo/pages/comments_details.dart';
+import 'package:flutter_demo/pages/comments_screen.dart';
 
 class RedditListing extends StatelessWidget {
   RedditListing({super.key, required this.redditList});

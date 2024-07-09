@@ -7,4 +7,9 @@ class RedditRepository {
     final Map<String, dynamic> list = await _redditProvider.fetchList();
     return list;
   }
+
+  Future<List> getRedditCommentsList(id) async {
+    final List list = await _redditProvider.fetchCommentsList(id);
+    return list;
+  }
 }

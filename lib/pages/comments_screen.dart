@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import "dart:convert";
-import 'package:flutter_demo/constant/constant.dart' as constant;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_demo/bloc/reddit_comments_bloc/reddit_comments_bloc.dart';
+import 'package:flutter_demo/bloc/reddit_comments_bloc/reddit_comments_state.dart';
 
 import 'package:flutter_demo/widgets/reddit_card.dart';
-import 'package:flutter_demo/widgets/comment.dart';
 import 'package:flutter_demo/widgets/comments_container.dart';
 
 class CommentsDetails extends StatefulWidget {
   const CommentsDetails(this.redditList, {super.key});
 
-  final redditList;
+  final Map<String, dynamic> redditList;
 
   @override
   State<CommentsDetails> createState() => _CommentsDetails();
 }
 
 class _CommentsDetails extends State<CommentsDetails> {
-  List<dynamic> _commentList = [];
-
   @override
   initState() {
     super.initState();
@@ -26,25 +23,10 @@ class _CommentsDetails extends State<CommentsDetails> {
   }
 
   void _loadComments() async {
-    final queryParameters = {
-      'limit': '10',
-    };
     var id = widget.redditList['id'].toString();
     try {
-      var url = Uri.https('oauth.reddit.com', '/r/apple/comments/$id');
-      final response = await http.get(url, headers: {
-        'Authorization': 'Bearer ${constant.AUTORIZATION_TOKEN}',
-        'Content-Type': 'application/json',
-      });
-      var comments = json.decode(response.body);
-      // print('Response body: ${comments}');
-      // print('Response comments: ${comments[1]['data']['children']}');
-      setState(() {
-        _commentList = comments[1]['data']['children'];
-      });
-
-      // print('Response status: $_redditList');
-      // print('Response comments: ${_commentList}');
+      BlocProvider.of<RedditCommentBloc>(context)
+          .add(RedditFetchCommentsList(id: id));
     } catch (err) {
       print('Response error: ${err}');
     }
@@ -62,7 +44,17 @@ class _CommentsDetails extends State<CommentsDetails> {
           child: Column(
             children: [
               RedditCard(redditItem: widget.redditList),
-              CommentsContainer(_commentList)
+              BlocBuilder<RedditCommentBloc, RedditCommentsState>(
+                  builder: (context, state) {
+                if (state is RedditCommentsListState) {
+                  return CommentsContainer(
+                      state.redditCommentsList[1]['data']['children']);
+                }
+                return const Center(
+                    child: CircularProgressIndicator(
+                  color: Color.fromARGB(255, 244, 95, 15),
+                ));
+              })
             ],
           ),
         ));

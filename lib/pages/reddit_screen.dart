@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_demo/bloc/reddit_bloc.dart';
-import 'package:flutter_demo/bloc/reddit_state.dart';
+import 'package:flutter_demo/bloc/reddit_list_bloc/reddit_list_bloc.dart';
+import 'package:flutter_demo/bloc/reddit_list_bloc/reddit_list_state.dart';
 
 import 'package:flutter_demo/widgets/reddit_listing.dart';
 import 'package:flutter_demo/constant/constant.dart' as constant;
 
-class RedditContainer extends StatefulWidget {
-  const RedditContainer({super.key});
+class RedditScreen extends StatefulWidget {
+  const RedditScreen({super.key});
 
   @override
-  State<RedditContainer> createState() => _RedditContainerState();
+  State<RedditScreen> createState() => _RedditScreenState();
 }
 
-class _RedditContainerState extends State<RedditContainer> {
-
+class _RedditScreenState extends State<RedditScreen> {
   @override
   initState() {
     super.initState();
@@ -24,7 +23,7 @@ class _RedditContainerState extends State<RedditContainer> {
   void _loadItem() async {
     //  print('loading data....');
     try {
-      BlocProvider.of<RedditBloc>(context).add(RedditFetchListData());
+      BlocProvider.of<RedditListBloc>(context).add(RedditFetchListData());
     } catch (err) {
       print('Response error: ${err}');
     }
@@ -48,8 +47,8 @@ class _RedditContainerState extends State<RedditContainer> {
             ],
           ),
         ),
-        body: BlocBuilder<RedditBloc, RedditState>(builder: (context, state) {
-          if (state is RedditFetchListState) {
+        body: BlocBuilder<RedditListBloc, RedditState>(builder: (context, state) {
+          if (state is RedditListState) {
             return RedditListing(
                 redditList: state.redditList['data']['children']);
           }
