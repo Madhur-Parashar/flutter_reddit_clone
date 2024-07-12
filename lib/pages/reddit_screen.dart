@@ -54,7 +54,7 @@ class _RedditScreenState extends State<RedditScreen> {
           }
           return const Center(
               child: CircularProgressIndicator(
-            color: Color.fromARGB(255, 244, 95, 15),
+            color:constant.REDDIT_COLOR,
           ));
         }));
   }

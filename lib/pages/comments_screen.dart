@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_demo/bloc/reddit_comments_bloc/reddit_comments_bloc.dart';
 import 'package:flutter_demo/bloc/reddit_comments_bloc/reddit_comments_state.dart';
+import 'package:flutter_demo/bloc/reddit_list_bloc/reddit_list_bloc.dart';
+import 'package:flutter_demo/bloc/reddit_list_bloc/reddit_list_state.dart';
+import 'package:flutter_demo/constant/constant.dart';
 
-import 'package:flutter_demo/widgets/reddit_card.dart';
 import 'package:flutter_demo/widgets/comments_list.dart';
+import 'package:flutter_demo/widgets/reddit_card.dart';
 
 class CommentsScreen extends StatefulWidget {
   const CommentsScreen(this.redditList, {super.key});
@@ -43,7 +46,13 @@ class _CommentsScreen extends State<CommentsScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              RedditCard(redditItem: widget.redditList),
+              BlocBuilder<RedditListBloc, RedditState>(
+                  builder: (context, state) {
+                if (state is RedditListState) {
+                  return RedditCard(redditItem: widget.redditList);
+                }
+                return const Center(child: Text("Loading comment..."));
+              }),
               BlocBuilder<RedditCommentBloc, RedditCommentsState>(
                   builder: (context, state) {
                 if (state is RedditCommentsListState) {
@@ -52,7 +61,7 @@ class _CommentsScreen extends State<CommentsScreen> {
                 }
                 return const Center(
                     child: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 244, 95, 15),
+                  color: REDDIT_COLOR,
                 ));
               })
             ],

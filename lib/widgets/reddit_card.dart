@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_demo/bloc/reddit_list_bloc/reddit_list_bloc.dart';
 import 'package:flutter_demo/constant/constant.dart' as constant;
+import 'package:flutter_demo/constant/constant.dart';
 
 class RedditCard extends StatelessWidget {
   RedditCard({super.key, required this.redditItem});
 
   Map<String, dynamic> redditItem = {};
-
   @override
   Widget build(context) {
+    Color currentUpVoteColor = redditItem['isUpVote'] == true
+        ?  REDDIT_COLOR
+        : const Color.fromARGB(255, 18, 19, 19);
+    Color currentDownVoteColor = redditItem['isDownVote'] == true
+        ?  REDDIT_COLOR
+        : const Color.fromARGB(255, 18, 19, 19);
     return Container(
       padding: const EdgeInsets.all(12.0),
       decoration: const BoxDecoration(color: Colors.white),
@@ -95,12 +102,24 @@ class RedditCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Icon(Icons.arrow_upward_outlined, size: 20),
-                    Text(redditItem['ups'].toString(),
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 18, 19, 19),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)),
+                    InkWell(
+                        child: Row(
+                          children: [
+                            Icon(Icons.arrow_upward_outlined,
+                                size: 20, color: currentUpVoteColor),
+                            Text(redditItem['ups'].toString(),
+                                style: TextStyle(
+                                    color: currentUpVoteColor,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                        onTap: () {
+                          print("Click up");
+                          context
+                              .read<RedditListBloc>()
+                              .add(RedditListLikeItem(id: redditItem['id']));
+                        }),
                     const VerticalDivider(
                       width: 20,
                       thickness: 1,
@@ -108,12 +127,28 @@ class RedditCard extends StatelessWidget {
                       endIndent: 0,
                       color: Colors.grey,
                     ),
-                    const Icon(Icons.arrow_downward_outlined, size: 20),
-                    Text(redditItem['downs'].toString(),
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 18, 19, 19),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)),
+                    InkWell(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_downward_outlined,
+                            size: 20,
+                            color: currentDownVoteColor,
+                          ),
+                          Text(redditItem['downs'].toString(),
+                              style: TextStyle(
+                                  color: currentDownVoteColor,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      onTap: () {
+                        print("Click down");
+                        context
+                            .read<RedditListBloc>()
+                            .add(RedditListDislikeItem(id: redditItem['id']));
+                      },
+                    ),
                   ],
                 ),
               ),
